@@ -1,15 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { decryptPayload } from "../../../../../../lib/auth/crypto";
 
 const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
 
 export async function POST(
-  request: Request,
-  context: { params?: { id?: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const idFromParams = context?.params?.id;
-  const idFromPath = new URL(request.url).pathname.split("/").filter(Boolean).pop();
-  const id = idFromParams ?? idFromPath;
+  const { id } = await params;
   if (!id || id === "undefined") {
     return NextResponse.json({ message: "Email log id is required" }, { status: 400 });
   }

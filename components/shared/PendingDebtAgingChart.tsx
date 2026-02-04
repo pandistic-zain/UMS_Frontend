@@ -14,7 +14,7 @@ import { apiFetch } from "@/lib/api/client";
 import { endpoints } from "@/lib/api/endpoints";
 
 type PendingAgingResponse = {
-  scope: "USER" | "TEAM";
+  scope: "USER" | "TEAM" | "SYSTEM";
   d0_7Minor: number;
   d8_30Minor: number;
   d31_60Minor: number;
@@ -37,7 +37,7 @@ const minorToRs = (value: number) => Number((value / 100).toFixed(2));
 export default function PendingDebtAgingChart({
   scope = "USER",
 }: {
-  scope?: "USER" | "TEAM";
+  scope?: "USER" | "TEAM" | "SYSTEM";
 }) {
   const [data, setData] = useState<PendingAgingResponse | null>(null);
   const [loading, setLoading] = useState(true);

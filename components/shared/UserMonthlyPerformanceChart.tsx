@@ -37,7 +37,7 @@ type PerformancePoint = {
 };
 
 type PerformanceResponse = {
-  scope: "USER" | "TEAM";
+  scope: "USER" | "TEAM" | "SYSTEM";
   monthFrom: string;
   monthTo: string;
   points: PerformancePoint[];
@@ -60,7 +60,7 @@ export default function UserMonthlyPerformanceChart({
   scope = "USER",
   months = 6,
 }: {
-  scope?: "USER" | "TEAM";
+  scope?: "USER" | "TEAM" | "SYSTEM";
   months?: number;
 }) {
   const [data, setData] = useState<PerformanceResponse | null>(null);

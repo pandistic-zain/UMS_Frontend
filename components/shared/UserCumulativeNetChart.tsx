@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -22,7 +22,7 @@ type CumulativePoint = {
 };
 
 type CumulativeResponse = {
-  scope: "USER" | "TEAM";
+  scope: "USER" | "TEAM" | "SYSTEM";
   monthFrom: string;
   monthTo: string;
   points: CumulativePoint[];
@@ -47,7 +47,7 @@ export default function UserCumulativeNetChart({
   scope = "USER",
   months = 6,
 }: {
-  scope?: "USER" | "TEAM";
+  scope?: "USER" | "TEAM" | "SYSTEM";
   months?: number;
 }) {
   const [data, setData] = useState<CumulativeResponse | null>(null);

@@ -11,6 +11,17 @@ type ActionResponse = {
   message?: string;
 };
 
+type ApiResponse<T> = {
+  data: T;
+};
+
+const unwrap = <T,>(response: T | ApiResponse<T>) => {
+  if (response && typeof response === "object" && "data" in response) {
+    return (response as ApiResponse<T>).data;
+  }
+  return response as T;
+};
+
 type PaymentDetail = {
   paymentId: number;
   obligationId: number;

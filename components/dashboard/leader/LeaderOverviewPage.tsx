@@ -584,13 +584,8 @@ export default function LeaderOverviewPage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {personalCards.map((card) => {
               const Icon = card.icon;
-              const CardTag = card.href ? Link : "div";
-              return (
-                <CardTag
-                  key={card.label}
-                  className={`rounded-2xl border border-blue-50 bg-gradient-to-br ${card.bg} p-4 transition hover:-translate-y-0.5 hover:shadow-md`}
-                  {...(card.href ? { href: card.href } : {})}
-                >
+              const content = (
+                <>
                   <div className="flex items-center justify-between">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
                       {card.label}
@@ -607,7 +602,28 @@ export default function LeaderOverviewPage() {
                   <p className="mt-1 text-xs text-slate-500">
                     Updated just now
                   </p>
-                </CardTag>
+                </>
+              );
+
+              if (card.href) {
+                return (
+                  <Link
+                    key={card.label}
+                    href={card.href}
+                    className={`rounded-2xl border border-blue-50 bg-gradient-to-br ${card.bg} p-4 transition hover:-translate-y-0.5 hover:shadow-md`}
+                  >
+                    {content}
+                  </Link>
+                );
+              }
+
+              return (
+                <div
+                  key={card.label}
+                  className={`rounded-2xl border border-blue-50 bg-gradient-to-br ${card.bg} p-4 transition hover:-translate-y-0.5 hover:shadow-md`}
+                >
+                  {content}
+                </div>
               );
             })}
           </div>
